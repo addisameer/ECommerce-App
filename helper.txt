@@ -1,0 +1,67 @@
+*******App.js file me main tag ke andar className me pt-16 v tha .mai hataya hun.mera aa nhi rha tha same same .thats why i hv done it.
+
+*******   imagetoBase64 me import karne me error aaya hai  capital small ka locha hai
+
+
+********* 2:16:6 isme image me mera bss "" print hua uska lamba sa string print hua tha
+
+
+**********************************************
+app.post me findOne me callback nhi le rha tha to mai usko promises me change kiya chatgpt ke help send
+2:39:52 me.
+
+//uska code ye tha and i hv changed it 
+app.post("/signup",async(req,res)=>{
+    console.log(req.body)
+    const {email}=req.body
+    userModel.findOne({email:email},(err,result)=>{
+        console.log(result)
+        console.log(err)
+        if(result){
+            res.send({message:"Email id already register "})
+        }else{
+            const data= userModel(req.body)    
+            const save=data.save()   
+            res.send({message:"Successfully sign up"})
+        }
+    })
+
+
+})
+
+changed to.........
+app.post("/signup",(req,res)=>{
+    console.log(req.body)
+    const {email}=req.body
+
+    userModel.findOne({email:email})
+       .then((result) => {
+        console.log(result)
+        if(result){
+            res.send({message:"Email id already register "})
+        }else{
+            const data= userModel(req.body)    
+            const save=data.save()   
+            res.send({message:"Successfully sign up"})
+        }
+
+       })
+       .catch((error) => {
+        console.log(error)
+
+       })
+
+
+
+        
+    })
+
+
+jarurat padne se dekhna..
+    ********************************************************************************
+    2:42:30 me mera database me show nhi kitya data
+
+    ************************************************************************************
+3:26:05 par ek problem hai  .console par user me mera data nhi dikh raha hai .
+empty dikha raha hai.but uska dikh raha hai
+**************************************************************************************************
